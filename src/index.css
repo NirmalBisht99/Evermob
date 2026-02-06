@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+:root {
+  /* Base canvas */
+  --bg-base: #fffefd;        /* very soft off-white */
+
+  /* Gradient tints */
+  --bg-blue-soft: #eef4ff;   /* calm trust blue */
+  --bg-orange-soft: #fff3ea; /* warm approachable orange */
+
+  /* Brand accents */
+  --brand-blue: #2563eb;    /* E color */
+  --brand-orange: #f97316;  /* M color */
+}
+
+/* ------------------------------
+   Custom Utilities
+-------------------------------- */@layer utilities {
+  .text-brand-highlight {
+    background: linear-gradient(
+      100deg,
+      #0f172a 0%,
+      rgba(37, 99, 235, 0.35) 35%,
+      rgba(249, 115, 22, 0.30) 55%,
+      #0f172a 75%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* premium depth */
+    text-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.18),
+      0 6px 18px rgba(15, 23, 42, 0.08);
+  }
+}
