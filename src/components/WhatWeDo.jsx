@@ -66,21 +66,31 @@ const categories = [
 
 export const WhatWeDo = () => {
   return (
-    <section id="WhatWeDo" className="py-24 px-6">
+    <section id="WhatWeDo" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
+        
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-heading">
-            What We <span className="text-gradient">Do</span>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium mb-4">
+            Our Expertise
+          </span>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+            What We <span className="bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent">Do</span>
           </h2>
+
+          <p className="text-slate-600 mt-4 max-w-2xl mx-auto text-lg">
+            Comprehensive mobile growth solutions across every stage of your app's journey
+          </p>
         </motion.div>
 
         <div className="space-y-20">
-          {categories.map((cat) => (
+          {categories.map((cat, catIndex) => (
             <motion.div
               key={cat.number}
               initial={{ opacity: 0, y: 30 }}
@@ -88,46 +98,63 @@ export const WhatWeDo = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
+              
+              {/* Category Header */}
               <div className="flex items-center gap-4 mb-8">
-                <span className="text-5xl font-bold font-heading text-primary/20">
+                <span className="text-5xl font-bold bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent opacity-40">
                   {cat.number}
                 </span>
 
                 <div>
-                  <p className="text-xs font-semibold tracking-widest uppercase text-primary">
+                  <p className="text-xs font-semibold tracking-widest uppercase text-indigo-600">
                     {cat.label}
                   </p>
-                  <h3 className="text-2xl font-bold font-heading">
+                  <h3 className="text-2xl font-bold text-slate-900">
                     {cat.subtitle}
                   </h3>
                 </div>
               </div>
 
+              {/* Cards Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {cat.blocks.map((block) => (
-                  <div
+                {cat.blocks.map((block, blockIndex) => (
+                  <motion.div
                     key={block.title}
-                    className="bg-card border border-border rounded-2xl p-6 hover:shadow-card-hover transition-shadow"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: blockIndex * 0.1, duration: 0.5 }}
+                    className="group bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
                   >
-                    <h4 className="text-lg font-bold font-heading mb-2">
-                      {block.title}
-                    </h4>
+                    
+                    {/* Gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-purple-50 to-cyan-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                      {block.desc}
-                    </p>
+                    <div className="relative z-10">
+                      {/* Title */}
+                      <h4 className="text-lg font-bold mb-2 text-slate-900 group-hover:text-indigo-600 transition-colors">
+                        {block.title}
+                      </h4>
 
-                    <div className="flex flex-wrap gap-2">
-                      {block.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-3 py-1 rounded-full bg-accent text-accent-foreground font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                      {/* Description */}
+                      <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                        {block.desc}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2">
+                        {block.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700 font-medium group-hover:bg-indigo-100 group-hover:text-indigo-700 transition-colors"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

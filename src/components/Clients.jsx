@@ -18,7 +18,7 @@ const clients = [
 
 export const Clients = () => {
   return (
-    <section className="py-28 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-28 bg-gradient-to-b from-white via-slate-50 to-white">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Heading */}
@@ -29,11 +29,15 @@ export const Clients = () => {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-medium mb-4">
+            Our Partners
+          </span>
+          
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
             Trusted Growth Partners
           </h2>
 
-          <p className="mt-4 text-slate-500 max-w-xl mx-auto">
+          <p className="mt-4 text-slate-600 max-w-xl mx-auto text-lg">
             Collaborating with leading performance networks and global media platforms.
           </p>
         </motion.div>
@@ -47,16 +51,16 @@ export const Clients = () => {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ y: -8 }}
               className="group relative"
             >
 
               {/* Glow Layer */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-indigo-200 via-cyan-200 to-purple-200 opacity-0 group-hover:opacity-40 blur-xl transition duration-500" />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-indigo-200 via-purple-200 to-cyan-200 opacity-0 group-hover:opacity-40 blur-xl transition duration-500" />
 
               {/* Glass Card */}
-              <div className="relative backdrop-blur-xl bg-white/70 border border-slate-200 rounded-3xl h-36 flex items-center justify-center shadow-sm group-hover:shadow-xl transition duration-500">
+              <div className="relative backdrop-blur-xl bg-white/90 border border-slate-200 rounded-3xl h-36 flex items-center justify-center shadow-sm group-hover:shadow-xl transition duration-500">
 
                 <img
                   src={client.logo}

@@ -1,45 +1,77 @@
-import { Linkedin, Mail, MapPin, Phone, Send, X } from "lucide-react";
+import { Linkedin, Mail, MapPin, Phone, Send, Twitter } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    setTimeout(() => {}, 1500);
+    // Simulate form submission
+    setTimeout(() => {
+      setIsSubmitting(false);
+      alert("Message sent successfully!");
+    }, 1500);
   };
 
   return (
     <section
       id="contact"
-      className="py-24 px-4 relative bg-secondary/30"
+      className="py-24 px-4 relative bg-gradient-to-b from-slate-50 to-white overflow-hidden"
     >
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-           Ready to  <span className="">Scale Your App?</span>
-        </h2>
+      {/* Background decorations */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-100/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-100/30 rounded-full blur-3xl" />
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-       Ready to Scale Your App?
-Let's discuss how we can help you achieve explosive growth. Book a free strategy call with our team.
-        </p>
+      <div className="container mx-auto max-w-5xl relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium mb-4">
+            Get In Touch
+          </span>
+
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+            Ready to <span className="bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent">Scale Your App?</span>
+          </h2>
+
+          <p className="text-slate-600 max-w-2xl mx-auto">
+            Let's discuss how we can help you achieve explosive growth. Book a free strategy call with our team.
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* LEFT SIDE */}
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6">
+          
+          {/* LEFT SIDE - Contact Info */}
+          <motion.div 
+            className="space-y-8"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 className="text-2xl font-semibold mb-6 text-slate-900">
               Contact Information
             </h3>
 
             <div className="space-y-6">
+              
               {/* Email */}
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />
+              <div className="flex items-start space-x-4 group">
+                <div className="p-3 rounded-full bg-gradient-to-br from-indigo-100 to-indigo-200 group-hover:from-indigo-500 group-hover:to-indigo-600 transition-all duration-300">
+                  <Mail className="h-6 w-6 text-indigo-600 group-hover:text-white transition" />
                 </div>
                 <div>
-                  <h4 className="font-medium">Email</h4>
+                  <h4 className="font-medium text-slate-900">Email</h4>
                   <a
                     href="mailto:support@evermob.com"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-slate-600 hover:text-indigo-600 transition-colors"
                   >
                     support@evermob.com
                   </a>
@@ -47,103 +79,128 @@ Let's discuss how we can help you achieve explosive growth. Book a free strategy
               </div>
 
               {/* Phone */}
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Phone className="h-6 w-6 text-primary" />
+              <div className="flex items-start space-x-4 group">
+                <div className="p-3 rounded-full bg-gradient-to-br from-purple-100 to-purple-200 group-hover:from-purple-500 group-hover:to-purple-600 transition-all duration-300">
+                  <Phone className="h-6 w-6 text-purple-600 group-hover:text-white transition" />
                 </div>
                 <div>
-                  <h4 className="font-medium">Phone</h4>
+                  <h4 className="font-medium text-slate-900">Phone</h4>
                   <a
-                    href="tel:+917579189494"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    href="tel:+15196978494"
+                    className="text-slate-600 hover:text-purple-600 transition-colors"
                   >
-                   +1 519 697-8494
+                    +1 519 697-8494
                   </a>
                 </div>
               </div>
 
               {/* Location */}
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <MapPin className="h-6 w-6 text-primary" />
+              <div className="flex items-start space-x-4 group">
+                <div className="p-3 rounded-full bg-gradient-to-br from-indigo-100 to-cyan-100 group-hover:from-indigo-500 group-hover:to-cyan-500 transition-all duration-300">
+                  <MapPin className="h-6 w-6 text-indigo-600 group-hover:text-white transition" />
                 </div>
                 <div>
-                  <h4 className="font-medium">Location</h4>
-                  <p className="text-muted-foreground">
-                   Adelaide St N, London, ON N6B 3J5, Canada
+                  <h4 className="font-medium text-slate-900">Location</h4>
+                  <p className="text-slate-600">
+                    Adelaide St N, London, ON N6B 3J5, Canada
                   </p>
                 </div>
               </div>
+
             </div>
 
             {/* Socials */}
             <div className="pt-8">
-              <h4 className="font-medium mb-4 text-center">
-                Connect With Me
+              <h4 className="font-medium mb-4 text-slate-900">
+                Connect With Us
               </h4>
-              <div className="flex space-x-4 justify-center">
-                <a href="https://www.linkedin.com/company/evermob/">
-                  <Linkedin />
+              <div className="flex space-x-4">
+                <a 
+                  href="https://www.linkedin.com/company/evermob/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-slate-100 hover:bg-indigo-500 flex items-center justify-center transition-all duration-300 group"
+                >
+                  <Linkedin className="w-5 h-5 text-slate-600 group-hover:text-white transition" />
                 </a>
-                <a href="https://www.linkedin.com/in/nirmalbisht99/">
-                  <X />
+                <a 
+                  href="https://www.linkedin.com/in/nirmalbisht99/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-slate-100 hover:bg-cyan-500 flex items-center justify-center transition-all duration-300 group"
+                >
+                  <Twitter className="w-5 h-5 text-slate-600 group-hover:text-white transition" />
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* RIGHT SIDE FORM */}
-          <div className="bg-white p-8 rounded-2xl shadow-lg">
-            <h3 className="text-2xl font-bold mb-8 text-gray-900">
+          {/* RIGHT SIDE - Contact Form */}
+          <motion.div 
+            className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 className="text-2xl font-bold mb-8 text-slate-900">
               Send a Message
             </h3>
 
             <form className="space-y-6" onSubmit={handleSubmit}>
+              
+              {/* Name Input */}
               <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900">
+                <label className="block text-sm font-semibold mb-2 text-slate-900">
                   Your Name
                 </label>
                 <input
                   type="text"
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
                   placeholder="Steve Johnson"
                 />
               </div>
 
+              {/* Email Input */}
               <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900">
+                <label className="block text-sm font-semibold mb-2 text-slate-900">
                   Your Email
                 </label>
                 <input
                   type="email"
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
                   placeholder="stevejohnson@gmail.com"
                 />
               </div>
 
+              {/* Message Textarea */}
               <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900">
+                <label className="block text-sm font-semibold mb-2 text-slate-900">
                   Your Message
                 </label>
                 <textarea
                   required
                   rows="5"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
-                  placeholder="Hello, I'd like to talk..."
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none transition"
+                  placeholder="Hello, I'd like to talk about..."
                 />
               </div>
 
+              {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white font-semibold text-base hover:shadow-lg transition-shadow duration-300 flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 text-white font-semibold text-base hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02]"
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
                 <Send size={18} />
               </button>
+
             </form>
-          </div>
+          </motion.div>
+
         </div>
       </div>
     </section>

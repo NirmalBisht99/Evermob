@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Target, Users, TrendingUp } from "lucide-react";
+import { Target, Users, TrendingUp, MessageCircle } from "lucide-react";
 
 export const WhyUs = () => {
   const features = [
@@ -38,10 +38,11 @@ export const WhyUs = () => {
   };
 
   return (
-    <section className="relative py-28 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+    <section id="WhyUs" className="relative py-28 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
 
-      {/* Background glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,115,0,0.08),transparent_60%)]" />
+      {/* Background glow effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.08),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(6,182,212,0.08),transparent_60%)]" />
 
       <div className="relative max-w-7xl mx-auto">
 
@@ -53,13 +54,17 @@ export const WhyUs = () => {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <p className="text-orange-500 font-semibold text-sm tracking-[0.25em] uppercase mb-4">
-            02 — WHY US
-          </p>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/20 text-indigo-400 text-sm font-medium mb-4 border border-indigo-500/30">
+            Why Choose Us
+          </span>
 
           <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-            How we do it
+            How we <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">do it</span>
           </h2>
+
+          <p className="text-slate-400 mt-4 max-w-2xl text-lg">
+            Our proven approach to mobile app growth combines strategic thinking with cutting-edge technology
+          </p>
         </motion.div>
 
         {/* Feature Grid */}
@@ -74,45 +79,56 @@ export const WhyUs = () => {
             <motion.div
               key={index}
               variants={card}
-              className="group relative bg-slate-800/40 backdrop-blur-lg rounded-2xl p-8 border border-slate-700/50 hover:border-orange-500/40 transition duration-500 hover:-translate-y-2"
+              className="group relative bg-slate-800/40 backdrop-blur-lg rounded-2xl p-8 border border-slate-700/50 hover:border-indigo-500/40 transition-all duration-500 hover:-translate-y-2"
             >
               {/* Glow hover layer */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500/10 via-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
 
-              {/* Icon */}
-              <div className="relative mb-7">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/30 flex items-center justify-center shadow-inner">
-                  <feature.icon className="w-7 h-7 text-orange-500" />
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className="mb-7">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 border border-indigo-500/30 flex items-center justify-center shadow-inner group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-cyan-500 transition-all duration-300">
+                    <feature.icon className="w-7 h-7 text-indigo-500 group-hover:text-white transition" />
+                  </div>
                 </div>
+
+                {/* Title */}
+                <p className="text-indigo-400 text-xs font-bold tracking-[0.2em] mb-4">
+                  {feature.title}
+                </p>
+
+                {/* Heading */}
+                <h3 className="text-white text-2xl font-semibold mb-4 leading-snug">
+                  {feature.heading}
+                </h3>
+
+                {/* Description */}
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
-
-              {/* Title */}
-              <p className="text-orange-500 text-xs font-bold tracking-[0.2em] mb-4">
-                {feature.title}
-              </p>
-
-              {/* Heading */}
-              <h3 className="text-white text-2xl font-semibold mb-4 leading-snug">
-                {feature.heading}
-              </h3>
-
-              {/* Description */}
-              <p className="text-slate-400 text-sm leading-relaxed">
-                {feature.description}
-              </p>
             </motion.div>
           ))}
         </motion.div>
 
       </div>
 
-      {/* Floating Chat Button */}
-      <button className="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-teal-500 hover:bg-teal-600 shadow-lg flex items-center justify-center transition hover:scale-110">
-        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-      </button>
+      {/* Floating Chat Button - Cyan */}
+      <motion.a
+        href="#contact"
+        className="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-cyan-500 hover:bg-cyan-600 shadow-lg flex items-center justify-center transition-all hover:scale-110 z-50 group"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        whileHover={{ scale: 1.1 }}
+      >
+        <MessageCircle className="w-6 h-6 text-white" />
+        
+        {/* Tooltip */}
+        <span className="absolute right-16 bg-slate-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+          Let's talk!
+        </span>
+      </motion.a>
 
     </section>
   );

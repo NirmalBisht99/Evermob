@@ -46,38 +46,43 @@ export const Navbar = () => {
         className={`
           fixed top-0 left-0 w-full z-40
           transition-all duration-300
-          ${isScrolled ? "py-2 bg-white/80 backdrop-blur-md shadow-md" : "py-4"}
+          ${isScrolled ? "py-2 bg-white/95 backdrop-blur-md shadow-md" : "py-4 bg-white/80 backdrop-blur-sm"}
         `}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
+          
           {/* LOGO */}
           <a
             href="#hero"
             className={`
               font-extrabold tracking-tight
               transition-all duration-300
-              hover:drop-shadow-[0_0_10px_rgba(37,99,235,0.35)]
+              hover:scale-105
               ${isScrolled ? "scale-90" : "scale-100"}
             `}
           >
             <span className="text-3xl md:text-4xl leading-none">
-              <span className="text-[var(--brand-blue)]">Ever</span>
-              <span className="text-[var(--brand-orange)]">Mob</span>
+              <span className="text-blue-600">Ever</span>
+              <span className="text-orange-500">Mob</span>
             </span>
           </a>
 
           {/* DESKTOP NAV */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 className="
-                  text-slate-700
+                  text-slate-700 font-medium
                   transition-all duration-300
-                  hover:text-black
+                  hover:text-indigo-600
                   hover:scale-110
-                  hover:drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]
+                  relative
+                  after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 
+                  after:bg-gradient-to-r after:from-indigo-500 after:to-cyan-500
+                  after:transition-all after:duration-300
+                  hover:after:w-full
                 "
               >
                 {item.name}
@@ -88,7 +93,7 @@ export const Navbar = () => {
           {/* MOBILE TOGGLE */}
           <button
             onClick={() => setIsMenuOpen(true)}
-            className="md:hidden p-2 text-slate-900"
+            className="md:hidden p-2 text-slate-900 hover:bg-slate-100 rounded-lg transition"
             aria-label="Open menu"
           >
             <Menu size={26} />
@@ -106,14 +111,23 @@ export const Navbar = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
+            
             {/* CLOSE BUTTON */}
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="absolute top-6 right-6 p-2"
+              className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-lg transition"
               aria-label="Close menu"
             >
-              <X size={28} />
+              <X size={28} className="text-slate-900" />
             </button>
+
+            {/* LOGO in Mobile Menu */}
+            <div className="absolute top-6 left-6">
+              <span className="text-2xl font-bold">
+                <span className="text-blue-600">Ever</span>
+                <span className="text-orange-500">Mob</span>
+              </span>
+            </div>
 
             {/* MENU ITEMS */}
             <motion.div
@@ -139,11 +153,11 @@ export const Navbar = () => {
                   }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   className="
-                    text-slate-700
+                    text-slate-700 font-semibold
                     transition-all duration-300
-                    hover:text-black
+                    hover:text-indigo-600
                     hover:scale-110
-                    hover:drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]
+                    text-center
                   "
                 >
                   {item.name}
