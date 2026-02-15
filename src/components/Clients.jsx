@@ -30,11 +30,11 @@ export const Clients = () => {
           className="mb-16 text-center"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-medium mb-4">
-            Our Partners
+            Our Business Partners
           </span>
          
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-            Trusted Growth Partners
+           Our Esteemed Clients
           </h2>
 
           <p className="mt-4 text-slate-600 max-w-xl mx-auto text-lg">
