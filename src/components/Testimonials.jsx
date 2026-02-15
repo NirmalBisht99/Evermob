@@ -25,79 +25,101 @@ const testimonials = [
   },
 ];
 
+/* Animation container */
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.2 }
+  }
+};
+
+/* Card animation */
+const card = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 }
+};
+
 export const Testimonials = () => {
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-white to-slate-50">
-      <div className="container mx-auto px-6">
+    <section className="relative py-28 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+
+      {/* Background glow effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.08),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(6,182,212,0.08),transparent_60%)]" />
+
+      <div className="relative max-w-7xl mx-auto">
         
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-20"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/20 text-purple-400 text-sm font-medium mb-4 border border-purple-500/30">
             Testimonials
           </span>
 
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900">
+          <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
             What Our{" "}
-            <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
               Clients Say
             </span>
           </h2>
 
-          <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+          <p className="text-slate-400 mt-4 max-w-2xl text-lg">
             Don't just take our word for it — hear from the teams we've helped scale.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Testimonials Grid */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {testimonials.map((testimonial, index) => (
             
             <motion.div
               key={testimonial.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              whileHover={{ y: -8 }}
-              className="group"
+              variants={card}
+              className="group relative bg-slate-800/40 backdrop-blur-lg rounded-2xl p-8 border border-slate-700/50 hover:border-purple-500/40 transition-all duration-500 hover:-translate-y-2"
             >
-              <div className="h-full bg-white backdrop-blur-sm rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-indigo-200 transition-all duration-300 relative overflow-hidden">
-                
-                {/* Gradient accent */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-400 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Glow hover layer */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/10 via-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
 
+              <div className="relative z-10">
                 {/* Quote icon */}
-                <div className="mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-purple-500 transition-all duration-300">
-                    <Quote className="w-6 h-6 text-indigo-600 group-hover:text-white transition" />
+                <div className="mb-7">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30 flex items-center justify-center shadow-inner group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-indigo-500 transition-all duration-300">
+                    <Quote className="w-7 h-7 text-purple-400 group-hover:text-white transition" />
                   </div>
                 </div>
 
                 {/* Quote text */}
-                <p className="text-slate-700 leading-relaxed mb-8 text-base">
+                <p className="text-slate-300 leading-relaxed mb-8 text-base">
                   "{testimonial.quote}"
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-4 pt-6 border-t border-slate-200">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-400 flex items-center justify-center text-white font-semibold text-sm shadow-md">
+                <div className="flex items-center gap-4 pt-6 border-t border-slate-700/50">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 via-indigo-500 to-cyan-500 flex items-center justify-center text-white font-semibold text-sm shadow-lg">
                     {testimonial.avatar}
                   </div>
 
                   <div>
-                    <h4 className="font-semibold text-slate-900">
+                    <h4 className="font-semibold text-white mb-1">
                       {testimonial.name}
                     </h4>
 
-                    <p className="text-sm text-slate-600">
-                      {testimonial.role},{" "}
-                      <span className="text-indigo-600">
-                        {testimonial.company}
-                      </span>
+                    <p className="text-sm text-slate-400">
+                      {testimonial.role}
+                    </p>
+                    <p className="text-sm text-purple-400">
+                      {testimonial.company}
                     </p>
                   </div>
                 </div>
@@ -106,7 +128,7 @@ export const Testimonials = () => {
             </motion.div>
 
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

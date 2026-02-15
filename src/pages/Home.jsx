@@ -11,11 +11,9 @@ import { Testimonials } from "../components/Testimonials";
 import { Clients } from "../components/Clients";
 
 export const Home = () => {
-  return <div className="min-h-screen bg-background text-foreground overflow-x-hidden px-4 sm:px-10 md:px-14 lg:px-28 bg-gradient-to-b from-teal-50 to-orange-50">
-    
+  return  <div className=' bg-gradient-to-b frm-teal-50 to-orange-50'>
 <Navbar/>
 
-<main>
   <Hero />
   <Services/>
   <WhatWeDo/>
@@ -25,7 +23,6 @@ export const Home = () => {
   <Testimonials/>
   <Contact/>
   <Footer />
-</main>
 
 
   </div>

@@ -101,70 +101,103 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      {/* MOBILE OVERLAY */}
+      {/* MOBILE OVERLAY - Slides from right */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            className="fixed inset-0 z-50 md:hidden bg-white flex flex-col items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-          >
-            
-            {/* CLOSE BUTTON */}
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-lg transition"
-              aria-label="Close menu"
-            >
-              <X size={28} className="text-slate-900" />
-            </button>
-
-            {/* LOGO in Mobile Menu */}
-            <div className="absolute top-6 left-6">
-              <span className="text-2xl font-bold">
-                <span className="text-blue-600">Ever</span>
-                <span className="text-orange-500">Mob</span>
-              </span>
-            </div>
-
-            {/* MENU ITEMS */}
+          <>
+            {/* Backdrop */}
             <motion.div
-              className="flex flex-col space-y-8 text-xl"
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={{
-                visible: {
-                  transition: { staggerChildren: 0.08 },
-                },
-                hidden: {},
-              }}
+              className="fixed inset-0 z-40 bg-black/50 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setIsMenuOpen(false)}
+            />
+
+            {/* Slide Panel */}
+            <motion.div
+              className="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[85vw] bg-white shadow-2xl md:hidden flex flex-col"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
             >
-              {navItems.map((item) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
+              
+              {/* Header */}
+              <div className="flex items-center justify-between p-6 border-b border-slate-200">
+                <span className="text-2xl font-bold">
+                  <span className="text-blue-600">Ever</span>
+                  <span className="text-orange-500">Mob</span>
+                </span>
+
+                <button
                   onClick={() => setIsMenuOpen(false)}
+                  className="p-2 hover:bg-slate-100 rounded-lg transition"
+                  aria-label="Close menu"
+                >
+                  <X size={24} className="text-slate-900" />
+                </button>
+              </div>
+
+              {/* MENU ITEMS */}
+              <nav className="flex-1 overflow-y-auto p-6">
+                <motion.div
+                  className="flex flex-col space-y-1"
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
                   variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
+                    visible: {
+                      transition: { staggerChildren: 0.05 },
+                    },
+                    hidden: {},
                   }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  {navItems.map((item, index) => (
+                    <motion.a
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      variants={{
+                        hidden: { opacity: 0, x: 20 },
+                        visible: { opacity: 1, x: 0 },
+                      }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className="
+                        px-4 py-3 rounded-lg
+                        text-slate-700 font-semibold text-lg
+                        transition-all duration-200
+                        hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50
+                        hover:text-indigo-600
+                        active:scale-95
+                      "
+                    >
+                      {item.name}
+                    </motion.a>
+                  ))}
+                </motion.div>
+              </nav>
+
+              {/* Footer */}
+              <div className="p-6 border-t border-slate-200">
+                <a
+                  href="#contact"
+                  onClick={() => setIsMenuOpen(false)}
                   className="
-                    text-slate-700 font-semibold
-                    transition-all duration-300
-                    hover:text-indigo-600
-                    hover:scale-110
-                    text-center
+                    w-full py-3 px-6 rounded-xl
+                    bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500
+                    text-white font-semibold text-center
+                    block
+                    hover:shadow-lg transition-all duration-300
                   "
                 >
-                  {item.name}
-                </motion.a>
-              ))}
+                  Get in touch
+                </a>
+              </div>
+
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

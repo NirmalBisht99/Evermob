@@ -8,12 +8,12 @@ import heetch from "../assets/heetch.png";
 import toYou from "../assets/toYou.png";
 
 const clients = [
-  { name: "Albert Blue", logo: albertBlue },
-  { name: "Binance", logo: binance },
-  { name: "Bwin", logo: bwin },
-  { name: "GitHub", logo: githubLogo },
-  { name: "Heetch", logo: heetch },
-  { name: "To You", logo: toYou },
+  { name: "Albert Blue", logo: albertBlue, gradient: "from-blue-100 to-indigo-100" },
+  { name: "Binance", logo: binance, gradient: "from-yellow-100 to-orange-100" },
+  { name: "Bwin", logo: bwin, gradient: "from-green-100 to-emerald-100" },
+  { name: "GitHub", logo: githubLogo, gradient: "from-slate-100 to-gray-100" },
+  { name: "Heetch", logo: heetch, gradient: "from-purple-100 to-pink-100" },
+  { name: "To You", logo: toYou, gradient: "from-cyan-100 to-blue-100" },
 ];
 
 export const Clients = () => {
@@ -32,7 +32,7 @@ export const Clients = () => {
           <span className="inline-block px-4 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-medium mb-4">
             Our Partners
           </span>
-          
+         
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
             Trusted Growth Partners
           </h2>
@@ -57,16 +57,26 @@ export const Clients = () => {
             >
 
               {/* Glow Layer */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-indigo-200 via-purple-200 to-cyan-200 opacity-0 group-hover:opacity-40 blur-xl transition duration-500" />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-indigo-300 via-purple-300 to-cyan-300 opacity-0 group-hover:opacity-50 blur-xl transition duration-500" />
 
-              {/* Glass Card */}
-              <div className="relative backdrop-blur-xl bg-white/90 border border-slate-200 rounded-3xl h-36 flex items-center justify-center shadow-sm group-hover:shadow-xl transition duration-500">
+              {/* Glass Card with Gradient Background */}
+              <div className={`relative backdrop-blur-xl bg-gradient-to-br ${client.gradient} border border-slate-200 rounded-3xl h-48 flex flex-col items-center justify-center shadow-sm group-hover:shadow-2xl transition duration-500 overflow-hidden`}>
 
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="max-h-12 object-contain opacity-80 group-hover:opacity-100 transition"
-                />
+                {/* Logo */}
+                <div className="relative z-10 transition-all duration-300 group-hover:scale-110">
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="max-h-20 max-w-[200px] object-contain opacity-90 group-hover:opacity-100 transition filter drop-shadow-lg"
+                  />
+                </div>
+
+                {/* Company Name - Shows on Hover */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <p className="text-white font-semibold text-lg text-center">
+                    {client.name}
+                  </p>
+                </div>
 
               </div>
 

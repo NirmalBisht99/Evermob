@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import im2 from "./im2.jpg";
 
 export const About = () => {
   return (
@@ -62,15 +63,12 @@ export const About = () => {
         >
           <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
             {/* Placeholder for team photo or office image */}
-            <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-              <p className="text-slate-400">Team Photo / Office Image</p>
-              {/* Replace with actual image:
+            <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">           
               <img 
-                src="/path-to-team-photo.jpg" 
+                 src={im2}        
                 alt="EverMob Team"
                 className="w-full h-full object-cover"
               />
-              */}
             </div>
           </div>
         </motion.div>

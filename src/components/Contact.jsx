@@ -1,19 +1,89 @@
-import { Linkedin, Mail, MapPin, Phone, Send, Twitter } from "lucide-react";
+import { Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
 
 export const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-  const handleSubmit = (e) => {
+  // EmailJS Configuration - Replace these with your actual credentials
+  const EMAILJS_CONFIG = {
+    serviceID: 'YOUR_SERVICE_ID',      // Replace with your EmailJS service ID
+    templateID: 'YOUR_TEMPLATE_ID',    // Replace with your EmailJS template ID
+    publicKey: 'YOUR_PUBLIC_KEY'       // Replace with your EmailJS public key
+  };
+
+  // Set this to true to use EmailJS, false to use mailto fallback
+  const USE_EMAILJS = false; // Change to true after setting up EmailJS
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    if (USE_EMAILJS) {
+      // EmailJS Implementation
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_email: 'support@evermob.com'
+      };
+
+      try {
+        const response = await emailjs.send(
+          EMAILJS_CONFIG.serviceID,
+          EMAILJS_CONFIG.templateID,
+          templateParams,
+          EMAILJS_CONFIG.publicKey
+        );
+        
+        console.log('SUCCESS!', response.status, response.text);
+        alert('Message sent successfully! We will get back to you soon.');
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+      } catch (error) {
+        console.error('FAILED...', error);
+        alert('Failed to send message. Please try again or email us directly at support@evermob.com');
+      } finally {
+        setIsSubmitting(false);
+      }
+    } else {
+      // Mailto Fallback Implementation
+      const subject = `Contact Form: Message from ${formData.name}`;
+      const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+      
+      // Open user's default email client
+      window.location.href = `mailto:support@evermob.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      
+      // Show confirmation
+      alert('Your default email client will open. Please send the email from there.');
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+      
       setIsSubmitting(false);
-      alert("Message sent successfully!");
-    }, 1500);
+    }
   };
 
   return (
@@ -123,14 +193,6 @@ export const Contact = () => {
                 >
                   <Linkedin className="w-5 h-5 text-slate-600 group-hover:text-white transition" />
                 </a>
-                <a 
-                  href="https://www.linkedin.com/in/nirmalbisht99/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-slate-100 hover:bg-cyan-500 flex items-center justify-center transition-all duration-300 group"
-                >
-                  <Twitter className="w-5 h-5 text-slate-600 group-hover:text-white transition" />
-                </a>
               </div>
             </div>
           </motion.div>
@@ -156,9 +218,12 @@ export const Contact = () => {
                 </label>
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   required
                   className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
-                  placeholder="Steve Johnson"
+                  placeholder="ABC"
                 />
               </div>
 
@@ -169,9 +234,12 @@ export const Contact = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                   className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
-                  placeholder="stevejohnson@gmail.com"
+                  placeholder="abc@gmail.com"
                 />
               </div>
 
@@ -181,6 +249,9 @@ export const Contact = () => {
                   Your Message
                 </label>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   required
                   rows="5"
                   className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none transition"
@@ -197,6 +268,12 @@ export const Contact = () => {
                 {isSubmitting ? "Sending..." : "Send Message"}
                 <Send size={18} />
               </button>
+
+              {/* Info text based on mode */}
+              {!USE_EMAILJS && (
+                <p className="text-sm text-slate-500 text-center">
+                </p>
+              )}
 
             </form>
           </motion.div>
