@@ -9,8 +9,8 @@ export const Hero = () => {
     >
       {/* PREMIUM BACKGROUND LIGHT WASH */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-[32%] h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-blue-200/20 blur-[120px]" />
-        <div className="absolute left-1/2 top-[48%] h-[300px] w-[520px] -translate-x-1/2 rounded-full bg-orange-200/15 blur-[120px]" />
+        <div className="absolute left-1/2 top-[32%] h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-blue blur-[120px]" />
+        <div className="absolute left-1/2 top-[48%] h-[300px] w-[520px] -translate-x-1/2 rounded-full bg-orange blur-[120px]" />
       </div>
 
       {/* MAIN CONTENT */}

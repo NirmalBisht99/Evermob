@@ -85,7 +85,7 @@ export const About = () => {
             { value: "500M+", label: "App Installs", color: "from-indigo-500 to-indigo-600" },
             { value: "120+", label: "Clients Worldwide", color: "from-purple-500 to-purple-600" },
             { value: "50+", label: "Countries", color: "from-indigo-500 to-cyan-500" },
-            { value: "99%", label: "Client Retention", color: "from-cyan-500 to-indigo-500" },
+            { value: "90%", label: "Client Retention", color: "from-cyan-500 to-indigo-500" },
           ].map((stat, index) => (
             <motion.div 
               key={stat.label} 

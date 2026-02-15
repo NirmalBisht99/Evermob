@@ -11,7 +11,7 @@ const clients = [
   { name: "Albert Blue", logo: albertBlue, gradient: "from-blue-100 to-indigo-100" },
   { name: "Binance", logo: binance, gradient: "from-yellow-100 to-orange-100" },
   { name: "Bwin", logo: bwin, gradient: "from-green-100 to-emerald-100" },
-  { name: "GitHub", logo: githubLogo, gradient: "from-slate-100 to-gray-100" },
+  { name: "TutuApp", logo: githubLogo, gradient: "from-slate-100 to-gray-100" },
   { name: "Heetch", logo: heetch, gradient: "from-purple-100 to-pink-100" },
   { name: "To You", logo: toYou, gradient: "from-cyan-100 to-blue-100" },
 ];
